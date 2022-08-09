@@ -19,6 +19,7 @@ explore: orders {
 }
 
 explore: users {}
+explore: dt_test_excel {}
 
 explore: order_items {
   join: inventory_items {
