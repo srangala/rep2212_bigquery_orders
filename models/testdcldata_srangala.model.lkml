@@ -20,6 +20,7 @@ explore: orders {
 
 explore: users {}
 explore: dt_test_excel {}
+explore: dt_pivot_image_test {}
 
 explore: order_items {
   join: inventory_items {
