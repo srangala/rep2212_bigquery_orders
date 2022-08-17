@@ -35,4 +35,10 @@ view: order_items {
     type: count
     drill_fields: [id, inventory_items.id, orders.id]
   }
+
+  measure: number_measure {
+    type: number
+    value_format_name: percent_2
+    sql: ${count}/ NULLIF(${orders.count},0) ;;
+  }
 }
