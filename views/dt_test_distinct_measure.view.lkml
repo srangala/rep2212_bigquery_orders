@@ -1,18 +1,14 @@
 view: dt_test_distinct_measure {
 derived_table: {
-  sql: SELECT 1 AS pk_field, 3 AS non_unique_key, 12.01 AS cost, 'name1' AS name
+  sql: SELECT 1 AS order_item_id, 1 AS order_id, 10.00 AS order_shipping
       UNION ALL
-      SELECT 2 AS pk_field, 3 AS non_unique_key, 12.01 AS cost, 'name2' AS name
+      SELECT 2 AS order_item_id, 1 AS order_id, 10.00 AS order_shipping
       UNION ALL
-      SELECT 3 AS pk_field, 2 AS non_unique_key, 10.00 AS cost, 'name3' AS name
+      SELECT 3 AS order_item_id, 2 AS order_id, 20.00 AS order_shipping
       UNION ALL
-      SELECT 4 AS pk_field, 2 AS non_unique_key, 10.00 AS cost, 'name4' AS name
+      SELECT 4 AS order_item_id, 2 AS order_id, 20.00 AS order_shipping
       UNION ALL
-      SELECT 5 AS pk_field, 3 AS non_unique_key, 3.50 AS cost, 'name5' AS name
-      UNION ALL
-      SELECT 6 AS pk_field, 3 AS non_unique_key, 3.50 AS cost, 'name6' AS name
-      UNION ALL
-      SELECT 7 AS pk_field, 3 AS non_unique_key, 3.50 AS cost, 'name7' AS name
+      SELECT 5 AS order_item_id, 2 AS order_id, 20.00 AS order_shipping
  ;;
 }
 
@@ -21,34 +17,30 @@ measure: count {
   drill_fields: [detail*]
 }
 
-measure: distinct_cost_sum {
-  type: sum_distinct
-  sql_distinct_key: ${TABLE}.non_unique_key ;;
-  sql: ${TABLE}.cost ;;
-}
+# Will calculate the correct shipping amount
+  measure: total_shipping {
+    type: sum_distinct
+    sql_distinct_key: ${order_id} ;;
+    sql: ${order_shipping} ;;
+  }
 
-dimension: pk_field {
+dimension: order_item_id {
   type: number
-  sql: ${TABLE}.pk_field ;;
+  sql: ${TABLE}.order_item_id ;;
   primary_key: yes
 }
 
-dimension: non_unique_key {
+dimension: order_id {
   type: number
-  sql: ${TABLE}.non_unique_key ;;
+  sql: ${TABLE}.order_id ;;
 }
 
-dimension: cost {
+dimension: order_shipping {
   type: number
-  sql: ${TABLE}.cost ;;
-}
-
-dimension: name {
-  type: string
-  sql: ${TABLE}.name ;;
+  sql: ${TABLE}.order_shipping ;;
 }
 
 set: detail {
-  fields: [pk_field, non_unique_key, cost, name]
+  fields: [order_item_id, order_id, order_shipping]
 }
 }
