@@ -23,6 +23,14 @@ explore: dt_test_excel {}
 explore: dt_pivot_image_test {}
 explore: dt_test_distinct_measure {}
 
+explore: dt_a {
+  join: dt_b {
+    type: left_outer
+    sql_on: ${dt_a.id}=${dt_b.id} ;;
+    relationship: one_to_one
+  }
+}
+
 explore: order_items {
   join: inventory_items {
     type: left_outer
