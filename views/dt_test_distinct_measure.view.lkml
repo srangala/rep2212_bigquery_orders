@@ -2,13 +2,17 @@ view: dt_test_distinct_measure {
 derived_table: {
   sql: SELECT 1 AS pk_field, 3 AS non_unique_key, 12.01 AS cost, 'name1' AS name
       UNION ALL
-      SELECT 2 AS pk_field, 3 AS non_unique_key, 30.00 AS cost, 'name2' AS name
+      SELECT 2 AS pk_field, 3 AS non_unique_key, 12.01 AS cost, 'name2' AS name
       UNION ALL
       SELECT 3 AS pk_field, 2 AS non_unique_key, 10.00 AS cost, 'name3' AS name
       UNION ALL
-      SELECT 4 AS pk_field, 2 AS non_unique_key, 7.00 AS cost, 'name4' AS name
+      SELECT 4 AS pk_field, 2 AS non_unique_key, 10.00 AS cost, 'name4' AS name
       UNION ALL
       SELECT 5 AS pk_field, 3 AS non_unique_key, 3.50 AS cost, 'name5' AS name
+      UNION ALL
+      SELECT 6 AS pk_field, 3 AS non_unique_key, 3.50 AS cost, 'name6' AS name
+      UNION ALL
+      SELECT 7 AS pk_field, 3 AS non_unique_key, 3.50 AS cost, 'name7' AS name
  ;;
 }
 
