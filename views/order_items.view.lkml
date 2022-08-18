@@ -42,4 +42,47 @@ view: order_items {
     value_format_name: percent_2
     sql: ${count}/ NULLIF(${orders.count},0) ;;
   }
+
+  measure: test_case_format2 {
+    type: sum
+    hidden: yes
+    value_format_name: "decimal_0"
+    sql:CASE WHEN sale_price > 5 THEN sale_price
+    ELSE order_id
+    END ;;
+    drill_fields: [id, order_id,sale_price]
+  }
+
+  measure: test_case_format1 {
+    type: sum
+    label: "Sold"
+    value_format_name: "decimal_2"
+    sql:CASE WHEN sale_price > 5 THEN sale_price
+    ELSE order_id
+    END ;;
+
+    html: {% if sale_price._value > 5 %}
+
+    {{ test_case_format1._rendered_value }}
+
+    {% else %}
+
+    {{ test_case_format2._rendered_value }}
+
+    {% endif %}
+
+    ;;
+    drill_fields: [id, order_id,sale_price]
+  }
+
+  measure: total_sale {
+    type:sum
+    value_format_name: "decimal_2"
+    sql: ${sale_price} ;;
+  }
+  measure: total_test {
+    type:sum
+    value_format_name: "decimal_0"
+    sql: ${order_id} ;;
+  }
 }
