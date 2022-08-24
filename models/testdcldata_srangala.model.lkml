@@ -22,6 +22,7 @@ explore: users {}
 explore: dt_test_excel {}
 explore: dt_pivot_image_test {}
 explore: dt_test_distinct_measure {}
+explore: dt_null_filter {}
 
 explore: dt_a {
   join: dt_b {
