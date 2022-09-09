@@ -14,6 +14,13 @@ view: products {
     sql: ${TABLE}.brand ;;
   }
 
+  dimension: brand_test {
+    type: string
+    sql: concat("[", ${brand} ,"]|a");;
+    html: {% assign split_value = value | split: '|' %}
+    {{ split_value[0] | replace: "[", "<strong>" | replace: "]", "</strong>"}};;
+  }
+
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
