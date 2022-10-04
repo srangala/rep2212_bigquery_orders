@@ -28,6 +28,20 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  measure: max_date {
+    type: date
+    sql: MAX(${created_date}) ;;
+    html: <p style="text-align:left; color:#444444">{{ rendered_value | date: "%b %d, %y" }}</p> ;;
+    convert_tz: no
+  }
+
+  dimension: created_at_date {
+    type: date
+    #datatype: date
+    sql: ${TABLE}.created_at ;;
+    html:   {{rendered_value | date:"%m/%d/%Y"}};;
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;

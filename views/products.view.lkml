@@ -21,6 +21,71 @@ view: products {
     {{ split_value[0] | replace: "[", "<strong>" | replace: "]", "</strong>"}};;
   }
 
+  dimension: brand_test_2 {
+    type: string
+    sql: concat("[", ${brand} ,"]|a");;
+    html: {% assign split_value = value | split: '|' %} pre test
+      <strong>{{ split_value[0] | replace: "[", "" | replace: "]", ""}} </strong> post test;;
+  }
+
+  dimension: coaching_opportunity_work_efficency_1 {
+    type: string
+    label: "Coaching Opportunity 1"
+    #cpandey on 02-14-2022 Removing {{ }} around value split_value = {{value}} for AC-12937
+    # html: {% assign split_value = value | split: '|' %}
+    #   {{ split_value[0] | replace: "[", "<strong>" | replace: "]", "</strong>"}};;
+    ##html suggestion from Looker support start
+    html: {% assign split_value = value | split: '|' %}
+    {% assign split_value1 = split_value[0] | split: '[' %}
+        {% assign split_value2 = split_value1[1] | split: ']' %}
+  {{split_value1[0]}}
+  <strong> {{ split_value2 | slice: 0 }} </strong>
+  {{ split_value2 | slice: 1 }};;
+
+    ##html suggestion from Looker support end
+
+    #link: {
+    #  label: "Work Efficiency"
+    #  #cpandey on 02-14-2022 Removing {{ }} around value split_value = {{value}} for AC-12937
+    #  url: "{% if value != 'You don’t have any opportunities to review at this moment. Opportunities are refreshed every Monday.'and _user_attributes['activtrak_role_access'] contains 'Insights-WorkEfficiency'%} {% assign split_value = value | split: '|' %}/embed/dashboards/@{work_efficiency_overview_dashboard_id}?Team={{ _filters['user_group.team_or_null_filter'] | url_encode }}&Activity+Date={{ split_value[1] | url_encode }}{% endif %}"
+    #}
+      sql: COALESCE(CONCAT(${TABLE}.brand," square_brackets_text xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
+
+      #sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
+    }
+
+  dimension: coaching_opportunity_work_efficency_2 {
+    type: string
+    label: "Coaching Opportunity 2"
+    #cpandey on 02-14-2022 Removing {{ }} around value split_value = {{value}} for AC-12937
+    # html: {% assign split_value = value | split: '|' %}
+    #   {{ split_value[0] | replace: "[", "<strong>" | replace: "]", "</strong>"}};;
+    ##html suggestion from Looker support start
+    html: {% assign split_value = value | split: '|' %}
+          {% assign split_value1 = split_value[0] | split: '[' %}
+
+          {% assign split_value2 = split_value1[1] | split: ']' %}
+
+          {% assign split_value3 = split_value2 | slice: 0 %}
+          {% assign split_value4 = split_value2 | slice: 1 %}
+
+          {{split_value1 | slice: 0 }}
+          <strong> {{ split_value3[0] }} </strong>
+          {{ split_value4[0] }}
+        ;;
+
+    ##html suggestion from Looker support end
+
+    #link: {
+    #  label: "Work Efficiency"
+    #  #cpandey on 02-14-2022 Removing {{ }} around value split_value = {{value}} for AC-12937
+    #  url: "{% if value != 'You don’t have any opportunities to review at this moment. Opportunities are refreshed every Monday.'and _user_attributes['activtrak_role_access'] contains 'Insights-WorkEfficiency'%} {% assign split_value = value | split: '|' %}/embed/dashboards/@{work_efficiency_overview_dashboard_id}?Team={{ _filters['user_group.team_or_null_filter'] | url_encode }}&Activity+Date={{ split_value[1] | url_encode }}{% endif %}"
+    #}
+    sql: COALESCE(CONCAT(${TABLE}.brand," square_brackets_text xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
+
+    #sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
+  }
+
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
