@@ -33,7 +33,7 @@ dimension: test1 {
 
 }
   dimension: test2 {
-    sql: "[Albino Hernandez Esperon's] Focus Efficiency is less than 35% and is missing the goal by 1 hrs/day. [Slack] is the top application/site affecting Focus. |" ;;
+    sql: "[Albino Hernandez Esperon's] Focus Efficiency is less than 35% and is missing the goal by 1 hrs/day. [Slack] is the top application/site affecting Focus.|" ;;
 
   }
   dimension: coaching_opportunity_work_efficency_1 {
@@ -43,6 +43,7 @@ dimension: test1 {
     # html: {% assign split_value = value | split: '|' %}
     #   {{ split_value[0] | replace: "[", "<strong>" | replace: "]", "</strong>"}};;
     ##html suggestion from Looker support start
+
     html: {% assign split_value = value | split: '|' %}
     {% assign split_value1 = split_value[0] | split: '[' %}
         {% assign split_value2 = split_value1[1] | split: ']' %}
