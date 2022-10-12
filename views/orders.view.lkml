@@ -39,7 +39,8 @@ view: orders {
     type: date
     #datatype: date
     sql: ${TABLE}.created_at ;;
-    html:   {{rendered_value | date:"%m/%d/%Y"}};;
+    #html:   {{rendered_value | date:"%m/%d/%Y"}};;
+    html:  {{ rendered_value | date: "%Y-%m-%dT%H:%M:%SZ" }} ;;
   }
 
   dimension: status {

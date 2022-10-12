@@ -29,7 +29,7 @@ view: products {
   }
 
 dimension: test1 {
-  sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
+  sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text1] [square_brackets_text2] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
 
 }
   dimension: test2 {
@@ -57,7 +57,7 @@ dimension: test1 {
     #  #cpandey on 02-14-2022 Removing {{ }} around value split_value = {{value}} for AC-12937
     #  url: "{% if value != 'You don’t have any opportunities to review at this moment. Opportunities are refreshed every Monday.'and _user_attributes['activtrak_role_access'] contains 'Insights-WorkEfficiency'%} {% assign split_value = value | split: '|' %}/embed/dashboards/@{work_efficiency_overview_dashboard_id}?Team={{ _filters['user_group.team_or_null_filter'] | url_encode }}&Activity+Date={{ split_value[1] | url_encode }}{% endif %}"
     #}
-      sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
+      sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] [square_brackets_text2] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
 
       #sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
     }
