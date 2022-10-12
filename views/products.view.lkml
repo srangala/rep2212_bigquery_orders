@@ -54,11 +54,26 @@ dimension: test1 {
     ##html suggestion from Looker support start
 
     html: {% assign split_value = value | split: '|' %}
-    {% assign split_value1 = split_value[0] | split: '[' %}
-        {% assign split_value2 = split_value1[1] | split: ']' %}
-  {{split_value1[0]}}
-  <strong> {{ split_value2 | slice: 0 }} </strong>
-  {{ split_value2 | slice: 1 }};;
+    {% assign split_value1 = split_value[0] | split: ']' %}
+        {% assign split_value2 = split_value1[1] | split: '[' %}
+      split_value0 {{split_value | slice:0}}
+      <br></br>
+      split_value1 {{split_value1 | slice:0}}
+      <br></br>
+      split_value1 {{split_value1 | slice:1}}
+      <br></br>
+      split_value1 {{split_value1 | slice:2}}
+      <br></br>
+      split_value2 {{split_value2 | slice:0}}
+      <br></br>
+      split_value2 {{split_value2 | slice:1}}
+      <br></br>
+      split_value2 {{split_value2 | slice:2}}
+  ;;
+
+#{{split_value1[0]}}
+#  <strong> {{ split_value2 | slice: 0 }} </strong>
+#  {{ split_value2 | slice: 1 }}
 
     ##html suggestion from Looker support end
 
