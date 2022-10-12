@@ -33,7 +33,7 @@ dimension: test1 {
 
 }
   dimension: test2 {
-    sql: "[Albino Hernandez Esperon's] Focus Efficiency is less than 35% and is missing the goal by 1 hrs/day. [Slack] is the top application/site affecting Focus.|" ;;
+    sql: "[Albino Hernandez Esperon's] Focus Efficiency is less than 35% and is missing the goal by 1 hrs/day. [Slack] is the top application/site affecting Focus.[Sebastian] is helping to solve this case and also [Agustin]|" ;;
 
   }
   dimension: test3 {
@@ -58,17 +58,17 @@ dimension: test1 {
         {% assign split_value2 = split_value1[1] | split: '[' %}
       split_value0 {{split_value | slice:0}}
       <br></br>
-      split_value1 {{split_value1 | slice:0}}
+      split_value1 0 {{split_value1 | slice:0}}
       <br></br>
-      split_value1 {{split_value1 | slice:1}}
+      split_value1 1 {{split_value1 | slice:1}}
       <br></br>
-      split_value1 {{split_value1 | slice:2}}
+      split_value1 2 {{split_value1 | slice:2}}
       <br></br>
-      split_value2 {{split_value2 | slice:0}}
+      split_value2 0 {{split_value2 | slice:0}}
       <br></br>
-      split_value2 {{split_value2 | slice:1}}
+      split_value2 1 {{split_value2 | slice:1}}
       <br></br>
-      split_value2 {{split_value2 | slice:2}}
+      split_value2 2 {{split_value2 | slice:2}}
   ;;
 
 #{{split_value1[0]}}
@@ -88,6 +88,20 @@ dimension: test1 {
 
       #sql: COALESCE(CONCAT(${TABLE}.brand," [square_brackets_text] xyz |",${category}," to ",${item_name}),${TABLE}.brand) ;;
     }
+
+  dimension: ultimateTest{
+    type: string
+    label: "ultimateTest"
+    html: {% assign split_value = value | split: '|' %}
+          {% assign split_value1 = split_value[0] | split: ']' %}
+              {% for item in split_value1 %}
+              {% assign name = item | split: '[' %}
+              {{name | slice:0}}
+              <strong>{{name | slice:1}}</strong>
+              {% endfor  %}
+        ;;
+    sql: CONCAT(" ",${test2}) ;;
+  }
 
   dimension: coaching_opportunity_work_efficency_2 {
     type: string
