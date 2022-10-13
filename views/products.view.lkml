@@ -45,6 +45,11 @@ dimension: test1 {
 
   }
 
+  dimension: test5 {
+    sql: "For: [Albino Hernandez Esperon's] Focus Efficiency is less than [35%] and is missing the goal by 1 hrs/day. [Slack] is the top application/site affecting Focus.[Sebastian] is helping to solve this case and also [Agustin]|[Hola] asdf" ;;
+
+  }
+
   dimension: coaching_opportunity_work_efficency_1 {
     type: string
     label: "Coaching Opportunity 1"
@@ -92,7 +97,13 @@ dimension: test1 {
   dimension: ultimateTest{
     type: string
     label: "ultimateTest"
-    html: {% assign split_value = value | split: '|' %}
+    html: {% assign first_char = value | slice: 0 %}
+          {% if first_char == '[' %}
+              {% assign new_value = value | replace_first: '[', ' [' %}
+          {% else %}
+              {% assign new_value = value %}
+          {% endif %}
+          {% assign split_value = new_value | split: '|' %}
           {% assign split_value1 = split_value[0] | split: ']' %}
               {% for item in split_value1 %}
               {% assign name = item | split: '[' %}
@@ -100,7 +111,7 @@ dimension: test1 {
               <strong>{{name | slice:1}}</strong>
               {% endfor  %}
         ;;
-    sql: CONCAT(" ",${test2}) ;;
+    sql: ${test5} ;;
   }
 
   dimension: coaching_opportunity_work_efficency_2 {
